@@ -23,6 +23,11 @@ console.log("working")
 const container = document.querySelector('.container')
 console.log("container",container)
 
+let showCards = 0;
+const openedCards = []
+const recoverCovers = []
+
+
 const imgList = [
     "",
     '<i class="fa-solid fa-baseball"></i>',
@@ -49,9 +54,47 @@ console.log("random to 9",randomNum(9))
 //crea una card
 function creatCards(){
     const card = document.createElement('div')
-    card.className = "card card d-flex justify-content-center align-content-center"
+    card.className = "card d-flex justify-content-center align-content-center"
     console.log("created card",card)
+    card.addEventListener('click',()=>{
+        const cover = card.getElementsByClassName('card-cover')[0];
+        if(showCards<1 && !cover.classList.contains('d-none')){
+            cover.classList.toggle('d-none');
+            showCards+=1
+            openedCards.push(card);
+            console.log("opened card",openedCards);
+            recoverCovers.push(cover)
+
+        }else if(showCards<2 && !cover.classList.contains('d-none')){
+            cover.classList.toggle('d-none');
+            showCards = 0;
+            console.log("opened card",openedCards);
+            openedCards.push(card);
+            console.log(openedCards[0].lastChild.classList )
+            console.log(openedCards[1].lastChild.classList )
+            const uguali = openedCards[1].lastChild.classList[1] === openedCards[0].lastChild.classList[1] 
+            recoverCovers.push(cover)
+            console.log(recoverCovers,"to hide")
+            if(uguali){
+                console.log("hai fatto un punto");
+                recoverCovers.length = 0;
+                openedCards.length = 0;
+
+            }else if (!uguali){
+                        console.log("mi dispiace non hai fatto un punto");
+                        for(let i = 0; i < recoverCovers.length; i++){
+                            recoverCovers[i].className = "card-cover";
+                        }
+                        recoverCovers.length = 0;
+                        openedCards.length = 0;
+            }
+
+        }
+        // cover.classList.contains('d-none'); true ore false HMMM
+           
+    })
     container.append(card)
+    
     return card
 }
 
@@ -67,7 +110,8 @@ const secondTime = []
 function parteOneGame(){
     for(let i = 0; i < 18; i++){
         const cardOne = creatCards();
-        cardOne.innerHTML = `<div class="card-cover d-none"></div>`
+        
+        cardOne.innerHTML = `<div class="card-cover"></div>`
         let imgOne = creatImg();
         let tested = false;
         while(!tested){
@@ -84,6 +128,7 @@ function parteOneGame(){
             }
         }
         cardOne.innerHTML += `${imgOne}`;
+        
 
     }
 }
