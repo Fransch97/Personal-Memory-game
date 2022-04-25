@@ -58,6 +58,15 @@ function creatCards(){
     card.className = "card d-flex justify-content-center align-content-center"
     console.log("created card",card)
     card.addEventListener('click',()=>{
+        if(recoverCovers.length === 2){
+
+        for(let i = 0; i < recoverCovers.length; i++){
+            recoverCovers[i].className = "card-cover";
+        }
+        recoverCovers.length = 0;
+        openedCards.length = 0;
+    }
+
         const cover = card.getElementsByClassName('card-cover')[0];
         if(showCards<1 && !cover.classList.contains('d-none')){
             cover.classList.toggle('d-none');
@@ -67,6 +76,7 @@ function creatCards(){
             recoverCovers.push(cover)
 
         }else if(showCards<2 && !cover.classList.contains('d-none')){
+            
             cover.classList.toggle('d-none');
             showCards = 0;
             console.log("opened card",openedCards);
@@ -86,13 +96,8 @@ function creatCards(){
                 }
 
             }else if (!uguali){
-                        console.log("mi dispiace non hai fatto un punto");
-                        for(let i = 0; i < recoverCovers.length; i++){
-                            recoverCovers[i].className = "card-cover";
-                        }
-                        recoverCovers.length = 0;
-                        openedCards.length = 0;
-            }
+                //sound
+            } 
 
         }
         // cover.classList.contains('d-none'); true ore false HMMM
@@ -101,6 +106,11 @@ function creatCards(){
     container.append(card)
     
     return card
+}
+
+function recoverCovering(){
+   
+
 }
 
 //scelta di un immagine
