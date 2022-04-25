@@ -11,14 +11,15 @@ console.log("working")
 <i class="fa-solid fa-biohazard"></i>
 */
 
-// 18 cards
-// ogni immagine deve aparire due volte
-// alla prima generazione le carte devono essere scoperte
-// al inizio del gioco devono essere coperte
-//al click, la carta clickata deve essere scoperta
-// se la seconda clickata dopo la prima è uguale allora assegnare un punto
-//se non è uguale ricoprire entrambe
-// ogni immagine deve essere creata random 
+// 18 cards FATTO
+// ogni immagine deve aparire due volte FATTO
+// alla prima generazione le carte devono essere scoperte DA FARE
+// al inizio del gioco devono essere coperte DA FARE
+//al click, la carta clickata deve essere scoperta FATTO
+// se la seconda clickata dopo la prima è uguale allora assegnare un punto DAFARE
+//se non è uguale ricoprire entrambe FATTO
+// ogni immagine deve essere creata random FATTO
+// segnalare quando il gioco è finito FATTO
 
 const container = document.querySelector('.container')
 console.log("container",container)
@@ -26,7 +27,7 @@ console.log("container",container)
 let showCards = 0;
 const openedCards = []
 const recoverCovers = []
-
+let winControll = 0;
 
 const imgList = [
     "",
@@ -79,6 +80,10 @@ function creatCards(){
                 console.log("hai fatto un punto");
                 recoverCovers.length = 0;
                 openedCards.length = 0;
+                winControll += 2
+                if(winControll === 18){
+                    console.log("hai finito il gioco il tuo score quale sarà?")
+                }
 
             }else if (!uguali){
                         console.log("mi dispiace non hai fatto un punto");
