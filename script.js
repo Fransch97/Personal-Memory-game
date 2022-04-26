@@ -13,21 +13,27 @@ console.log("working")
 
 // 18 cards FATTO
 // ogni immagine deve aparire due volte FATTO
-// alla prima generazione le carte devono essere scoperte DA FARE
-// al inizio del gioco devono essere coperte DA FARE
+// alla prima generazione le carte devono essere scoperte FATTO
+// al inizio del gioco devono essere coperte FATTO
 //al click, la carta clickata deve essere scoperta FATTO
-// se la seconda clickata dopo la prima è uguale allora assegnare un punto DAFARE
+// se la seconda clickata dopo la prima è uguale allora assegnare un punto FATTO
 //se non è uguale ricoprire entrambe FATTO
 // ogni immagine deve essere creata random FATTO
 // segnalare quando il gioco è finito FATTO
+//mostrare il punteggio a fine partita FATTO IN CONSOLE
 
 const container = document.querySelector('.container')
-console.log("container",container)
+console.log("container",container);
+const btn = document.querySelector('button')
+
+console.log(btn)
+btn.addEventListener('click', start)
 
 let showCards = 0;
 const openedCards = []
 const recoverCovers = []
 let winControll = 0;
+let score = 0;
 
 const imgList = [
     "",
@@ -90,13 +96,16 @@ function creatCards(){
                 console.log("hai fatto un punto");
                 recoverCovers.length = 0;
                 openedCards.length = 0;
-                winControll += 2
+                winControll += 2;
+                score++;
                 if(winControll === 18){
-                    console.log("hai finito il gioco il tuo score quale sarà?")
+                    console.log("hai finito il gioco il tuo score è", score)
+                    // container.innerHTML
                 }
 
             }else if (!uguali){
                 //sound
+                score--;
             } 
 
         }
@@ -108,10 +117,7 @@ function creatCards(){
     return card
 }
 
-function recoverCovering(){
-   
 
-}
 
 //scelta di un immagine
 function creatImg(){
@@ -126,7 +132,7 @@ function parteOneGame(){
     for(let i = 0; i < 18; i++){
         const cardOne = creatCards();
         
-        cardOne.innerHTML = `<div class="card-cover"></div>`
+        cardOne.innerHTML = `<div class="card-cover d-none"></div>`
         let imgOne = creatImg();
         let tested = false;
         while(!tested){
@@ -148,4 +154,28 @@ function parteOneGame(){
     }
 }
 
-parteOneGame() 
+let counterBtn = 0
+function start(){
+    if(counterBtn === 0){
+        firstTime.length = 0,
+        secondTime.length = 0,
+        container.innerHTML = "";
+        parteOneGame();
+        counterBtn +=1
+        console.log("if")
+        btn.innerHTML = "Gioca finalmente !";
+        score = 0;
+    }else{
+        const coverGameStart = document.querySelectorAll('.card-cover');
+        console.log(coverGameStart)
+        for(let i = 0; i< coverGameStart.length; i++){
+            coverGameStart[i].classList.remove('d-none');
+        }
+        console.log("else")
+        counterBtn = 0;
+        btn.innerHTML = "replay"
+
+    }
+    
+
+}
